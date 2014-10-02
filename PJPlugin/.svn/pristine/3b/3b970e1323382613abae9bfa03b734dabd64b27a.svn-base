@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="pyjamaFileBuilder"
+         name="Pyjama Project Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder
+            hasNature="true">
+         <run
+               class="pjplugin.builder.FileBuilder">
+         </run>
+      </builder>
+   </extension>
+   <extension
+          id="pyjamamarker"
+          name="Pyjama Problem Marker"
+          point="org.eclipse.core.resources.markers">
+       <super
+             type="org.eclipse.core.resources.problemmarker">
+       </super>
+       <super
+             type="org.eclipse.core.resources.textmarker">
+       </super>
+       <persistent
+             value="true">
+       </persistent>
+    </extension>
+   <extension
+         id="pyjamaFileBuilderNature"
+         name="Pyjama Project Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="pjplugin.builder.FileBuilderNature">
+         </run>
+      </runtime>
+      <builder
+            id="pjplugin.pyjamaFileBuilder">
+      </builder>
+   </extension>
+  
+   <extension
+         id="xmlProblem"
+         name="XML Problem"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <persistent
+            value="true">
+      </persistent>
+   </extension>
+   <extension
+         point="org.eclipse.ui.importWizards">
+      <category
+            name="Pyjama File Import"
+            id="viptest.importWizards.sampleCategory">
+      </category>
+      <wizard
+            name="Pyjama Import File"
+            icon="icons/sample.gif"
+            category="viptest.importWizards.sampleCategory"
+            class="pjplugin.importWizards.ImportWizard"
+            id="viptest.importWizards.VIPTestImportWizard">
+         <description>
+            Import a file from the local file system into the workspace.
+         </description>
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="Pyjama code editor"
+            extensions="pj"
+            icon="icons/newclass.gif"
+            contributorClass="pjplugin.editors.MultiPageEditorContributor"
+            class="pjplugin.editors.Editor"
+            id="pjplugin.editors.MultiPageEditor">
+      </editor>
+   </extension>
+       <extension
+          point="org.eclipse.ui.newWizards">
+       <wizard
+             category="pjplugin.category"
+             class="pjplugin.wizards.CreateNewProject"
+             descriptionImage="icons/parait.png"
+             icon="icons/newjprj.gif"
+             id="pjplugin.wizards.NewProject"
+             name="Pyjama Project"
+             project="true">
+       </wizard>
+       <category
+             id="pjplugin.category"
+             name="Pyjama">
+       </category>
+       <wizard
+             category="pjplugin.category"
+             class="pjplugin.wizards.CreateNewSampleProject"
+             descriptionImage="icons/parait.png"             
+             icon="icons/newjprj.gif"
+             id="pjplugin.wizards.NewSampleProject"
+             name="Pyjama Sample Project"
+             project="true">
+       </wizard>
+       <wizard
+             category="pjplugin.category"
+             class="pjplugin.wizards.CreateNewClass"
+             descriptionImage="icons/parait.png"             
+             icon="icons/newclass.gif"
+             id="pjplugin.wizards.NewWizard"
+             name="Pyjama Class">
+       </wizard>
+    </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            id="pjplugin.preferences.PyjamaPreferencePage"
+            name="Pyjama Preferences"
+            class="pjplugin.preferences.PreferencePage">
+      </page>
+      <page
+            id="pjplugin.preferences.PyjamaPreferencePageBuild"
+            name="Build"
+            class="pjplugin.preferences.PreferencePageBuild"
+            category="pjplugin.preferences.PyjamaPreferencePage">
+      </page>
+      <page
+            id="pjplugin.preferences.PyjamaPreferencePageCompiler"
+            name="Compiler"
+            class="pjplugin.preferences.PreferencePageCompiler"
+            category="pjplugin.preferences.PyjamaPreferencePage">
+      </page>
+      <page
+            id="pjplugin.preferences.PyjamaPreferencePageEditor"
+            name="Editor"
+            class="pjplugin.preferences.PreferencePageEditor"
+            category="pjplugin.preferences.PyjamaPreferencePage">
+      </page>
+      
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="pjplugin.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Pyjama Category"
+            id="pjplugin">
+      </category>
+      <view
+            name="Pyjama View"
+            icon="icons/sample.gif"
+            category="Pyjama"
+            class="pjplugin.views.PJView"
+            id="pyjama.views.PJView">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.jdt.ui.JavaPerspective">
+         <view
+               ratio="0.5"
+               relative="org.eclipse.ui.views.TaskList"
+               relationship="right"
+               id="pyjama.views.PJView">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+
+   <extension id="pjplugin" point="org.eclipse.core.runtime.products"> 
+      <product name="Pyjama Development Plugin(PDP)" application="PDP" description="Pyjama project development tools. Consists of Pyjama code editor and the Pyjama compiler."> 
+          <property name="windowImages" value="icons/paraicon"/> 
+          <property name="aboutImage" value="icons/paraicon"/> 
+          <property name="aboutText" value="This plugin consists of editor for .pj file creation and editing and the Pyjama source-to-source compiler."/> 
+      </product> 
+   </extension>
+   <!-- extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            description="This is Pyjama Plugin action set"
+            id="PJPlugin.actionSet"
+            label="PJPlugin ActionSet"
+            visible="true">
+         <menu
+               id="PJPlugin.pyjamaMenu"
+               label="Pyjama"
+               path="additions">
+            <groupMarker
+                  name="content">
+            </groupMarker>
+            <separator
+                  name="additions">
+            </separator>
+         </menu>
+         <action
+               icon="icons/pluginDelete.png"
+               id="PJPlugin.actionClean"
+               label="Clean intermediate files"
+               menubarPath="PJPlugin.pyjamaMenu/content"
+               state="true"
+               style="push"
+               toolbarPath="Normal/additions"
+               tooltip="Clean the intermediate files from the Pyjama project">
+            <class
+                  class="pjplugin.actions.ActionClean">
+            </class>
+         </action>
+      </actionSet>
+   </extension>
+<extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer">
+         <command
+               commandId="pjplugin.menu.clean"
+               label="Clean intermediate Pyjama files"
+               style="push">
+         </command>
+         <command
+               commandId="pjplugin.menu.refactor"
+               label="Refactor Pyjama code"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension -->
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="pjplugin.menu.handler.menuActionClean"
+            id="pjplugin.menu.clean"
+            name="Clean">
+      </command>
+      <command
+            defaultHandler="pjplugin.menu.handler.menuActionRefactor"
+            id="pjplugin.menu.refactor"
+            name="Refactor">
+      </command>
+   </extension>  
+   
+     <extension point="org.eclipse.core.resources.markers"   
+        id="rfMarker">
+     <super type="org.eclipse.core.resources.textmarker"/>         
+     <persistent value="false"/>
+  </extension>
+
+  <extension point="org.eclipse.ui.editors.annotationTypes">
+     <type
+        super="org.eclipse.ui.workbench.texteditor.warning"
+        markerType="pjplugin.rfMarker"
+        name="pjplugin.rfAnnotation"
+        markerSeverity="1"/>
+  </extension>
+
+  <extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+       <specification
+        icon="icons/marker.png"
+         annotationType="pjplugin.rfAnnotation"
+         colorPreferenceKey="pjplugin.rf.color"
+         colorPreferenceValue="0,125,255"
+         contributesToHeader="false"
+         highlightPreferenceKey="pjplugin.rf.highlightfor"
+         highlightPreferenceValue="true"
+         includeOnPreferencePage="true"
+         label="PJPlugin RF Marker For"
+         overviewRulerPreferenceKey="pjpluing.rf.overview"
+         overviewRulerPreferenceValue="true"
+         presentationLayer="0"
+         textPreferenceKey="pjpluing.rf.text"
+         textPreferenceValue="true"
+         textStylePreferenceValue="BOX"
+         verticalRulerPreferenceKey="pjpluing.rf.ruler"
+         verticalRulerPreferenceValue="true">
+   </specification>
+  </extension>
+
+     <extension point="org.eclipse.core.resources.markers"   
+        id="rfMarkerGui">
+     <super type="org.eclipse.core.resources.textmarker"/>         
+     <persistent value="false"/>
+  </extension>
+
+  <extension point="org.eclipse.ui.editors.annotationTypes">
+     <type
+        super="org.eclipse.ui.workbench.texteditor.warning"
+        markerType="pjplugin.rfMarkerGui"
+        name="pjplugin.rfAnnotationGui"
+        markerSeverity="1"/>
+  </extension>
+
+  <extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+       <specification
+        icon="icons/marker.png"
+         annotationType="pjplugin.rfAnnotationGui"
+         colorPreferenceKey="pjplugin.rf.color"
+         colorPreferenceValue="200,200,255"
+         contributesToHeader="false"
+         highlightPreferenceKey="pjplugin.rf.highlightfor"
+         highlightPreferenceValue="true"
+         includeOnPreferencePage="true"
+         label="PJPlugin RF Marker For"
+         overviewRulerPreferenceKey="pjpluing.rf.overview"
+         overviewRulerPreferenceValue="true"
+         presentationLayer="0"
+         textPreferenceKey="pjpluing.rf.text"
+         textPreferenceValue="true"
+         textStylePreferenceValue="BOX"
+         verticalRulerPreferenceKey="pjpluing.rf.ruler"
+         verticalRulerPreferenceValue="true">
+   </specification>
+  </extension>
+  	
+	<extension
+         point="org.eclipse.ui.popupMenus">
+	     <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IProject"
+            nameFilter="*"
+            id="pjplugin.project">
+         <action
+               label="Add Pyjama Nature"
+               icon="icons/paraicon.png"
+               class="pjplugin.actions.AddPyjamaNature"
+               enablesFor="+"
+               id="pjplugin.actions.AddPyjamaNature">  
+               	<enablement> 
+             		<systemProperty name="displayPJNatureMenu" value="true"/> 
+            	</enablement>              	
+         </action>
+      </objectContribution>   
+   </extension>		
+
+	<extension
+         point="org.eclipse.ui.popupMenus">
+	     <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IResource"
+            nameFilter="*.java"
+            id="pjplugin.java">
+         <action
+               label="Convert to Pyjama"
+               icon="icons/paraicon.png"
+               class="pjplugin.actions.ConvertJavaToPyjama"
+               enablesFor="+"
+               id="pjplugin.actions.ConvertToPJ">  
+               	<enablement> 
+             		<systemProperty name="displayConvertToPJMenu" value="true"/> 
+            	</enablement>              	
+         </action>
+      </objectContribution>   
+   </extension>	
+   
+    <extension
+      	point="org.eclipse.ui.popupMenus">
+      	<objectContribution
+            objectClass="org.eclipse.ui.IEditorInput"
+            nameFilter="*.pj"
+            id="pjplugin.pj">
+       	<action
+               label="Parallelize this"
+               class="pjplugin.actions.ParallelAction"
+               enablesFor="+"
+               id="pjplugin.actions.ParallelAction">
+         </action>
+      </objectContribution>
+   </extension>
+	
+	<extension point="org.eclipse.ui.commands">
+		<command defaultHandler="pjplugin.actions.ConvertJavaToPyjama"
+	  		id="pjplugin.actions.convertJavaToPyjama">
+		</command>
+	</extension>	
+	
+	<extension point="org.eclipse.ui.decorators">  
+		<decorator   
+				id="pjplugin.filedecorator"   
+				label="File Decorator"   
+				state="true"   
+				class= "pjplugin.decorator.FileDecorator"   
+				adaptable="true"   
+				lightweight="true">   
+			<enablement>
+				<objectClass name="org.eclipse.core.resources.IResource"/>   
+			</enablement>  
+		</decorator>
+	</extension>
+	
+ </plugin>

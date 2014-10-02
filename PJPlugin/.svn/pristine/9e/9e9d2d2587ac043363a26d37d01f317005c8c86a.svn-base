@@ -1,0 +1,9 @@
+import pj.*;
+
+public class GuiAware {
+
+	public static void main(String[] arg){
+
+		System.out.println("Not provided yet. You may use the MandelBrot example");
+	}
+}

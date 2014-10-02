@@ -1,0 +1,22 @@
+import pj.*;
+
+public class ParallelDir {
+
+	public static void main(String[] arg){
+
+		System.out.println("This is sequential code");
+
+		//#omp parallel
+		{
+			//#omp for schedule(static, 10)
+			for(int i = 0; i < 100; i++){
+				System.out.println(i);
+			}
+		}
+		
+		System.out.println("Done.");
+	}
+}
+
+
+

@@ -1,0 +1,124 @@
+import pj.*;
+
+import java.awt.*;
+import java.awt.image.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.*;
+
+public class MandelBrot  extends JPanel  {
+	private WritableRaster raster;
+	private Object colorData;
+	private Object colorDataBG;
+	private Object colorDataBG1;
+	private Object colorDataBG2;
+	private Object colorDataBG3;
+	private Object colorDataBG4;
+	private ConcurrentHashMap<Integer, Integer> columnThread = new ConcurrentHashMap<Integer, Integer>();
+	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+	private static final double XMIN = -2;
+	private static final double XMAX = 2;
+	private static final double YMIN = -2;
+	private static final double YMAX = 2;
+	private static int width = 400;
+	private static int height = 400;
+	private static int MAX_ITERATIONS = 500000;
+	public void start() {
+		raster = image.getRaster();
+		ColorModel model = image.getColorModel();
+		colorData = model.getDataElements(Color.RED.getRGB(), null);
+		colorDataBG = model.getDataElements(Color.BLUE.getRGB(), null);
+		colorDataBG1 = model.getDataElements(Color.BLUE.getRGB(), null);
+		colorDataBG2 = model.getDataElements(Color.GREEN.getRGB(), null);
+		colorDataBG3 = model.getDataElements(Color.YELLOW.getRGB(), null);
+		colorDataBG4 = model.getDataElements(Color.BLACK.getRGB(), null);
+
+		//#omp parallel for freeguithread
+		for (int i = 0; i < width; i++) {
+			Boolean[] columnPixels = calculateColumn(i);
+
+			//#omp gui
+			{
+				colorColumn(i, columnPixels);
+			}
+
+		}
+	}
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(image, 0, 0, null);
+	}
+	//-- task (per column)
+	private Boolean[] calculateColumn(int i) {
+		Boolean[] columnPixels = new Boolean[height];
+		for (int j = 0; j < height; j++) {
+			double a = XMIN + i * (XMAX - XMIN) / width;
+			double b = YMIN + j * (YMAX - YMIN) / height;
+			columnPixels[j] = escapesToInfinity(a, b);
+		}
+		columnThread.put(i, Pyjama.omp_get_thread_num());
+		return columnPixels;
+	}
+	//-- GUI related
+	private void colorColumn(int i, Boolean[] columnPixels) {
+		boolean parallel = columnThread.size() != 0;
+		for (int r = 0; r < columnPixels.length; r++) {
+			if (columnPixels[r]) {
+				if (!parallel)
+					raster.setDataElements(i, r, colorDataBG);
+				else {
+					switch(columnThread.get(i)) {
+					case 0:
+						raster.setDataElements(i, r, colorDataBG1);
+						break;
+					case 1:
+						raster.setDataElements(i, r, colorDataBG2);
+						break;
+					case 2:
+						raster.setDataElements(i, r, colorDataBG3);
+						break;
+					case 3:
+						raster.setDataElements(i, r, colorDataBG4);
+						break;
+					}
+				}
+			} else {
+				raster.setDataElements(i, r, colorData);
+			}
+		}
+		repaint();
+	}
+	private boolean escapesToInfinity(double a, double b){ 
+		double x = 0.0;
+		double y = 0.0;
+		int iterations = 0;
+		do {
+			double xnew = x * x - y * y + a;
+			double ynew = 2 * x * y + b;
+			x = xnew;
+			y = ynew;
+			iterations++;
+			if (iterations == MAX_ITERATIONS)
+				return false;
+		} while (x <= 2 && y <= 2);
+		return true;
+	}
+	public static void main(String[] args) {
+		JFrame frame = new  JFrame();
+		frame.setTitle("ManderBrot Pyjama Application");
+		frame.setSize(width, height);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container contentPane = frame.getContentPane();
+		MandelBrot no = new MandelBrot();
+		contentPane.add(no, "Center");
+		frame.show(); //-- comment out to reduce X forwarding
+		no.start();
+	}
+}
+
+

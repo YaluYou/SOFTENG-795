@@ -1,0 +1,28 @@
+import pj.*;
+
+public class ReductionTest {
+	public static void main(String[] args) {
+
+		ReductionTest caller = new ReductionTest();
+
+		try {
+			int result = caller.runReduction();
+
+			System.out.println("The result in caller:");
+			System.out.println(result);
+		} catch (InterruptedException ex) {
+			ex.printStackTrace();
+		}
+
+	}
+	
+	public int runReduction() throws InterruptedException{		
+		int sum = 0;
+
+		//#omp parallel for reduction(+:sum) schedule(static)
+		for(int i = 1; i <= 100; i++){
+			sum+=i;
+		}	
+		return sum;
+	}
+}

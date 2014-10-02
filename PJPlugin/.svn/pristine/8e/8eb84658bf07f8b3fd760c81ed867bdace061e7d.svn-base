@@ -1,0 +1,50 @@
+!SESSION 2013-08-31 16:04:21.669 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_31
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_NZ
+Framework arguments:  -noupdate -application org.eclipse.ant.core.antRunner -file E:\SVN\workspace\PJPlugin\autogen.xml
+Command-line arguments:  -clean -noupdate -application org.eclipse.ant.core.antRunner -data E:\SVN\workspace\PJPlugin -file E:\SVN\workspace\PJPlugin\autogen.xml
+
+!ENTRY org.eclipse.osgi 4 0 2013-08-31 16:04:35.036
+!MESSAGE The -clean (osgi.clean) option was not successful. Unable to clean the storage area: D:\eclipse-indigo\configuration\org.eclipse.osgi
+!SESSION 2013-08-31 16:06:03.988 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_31
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_NZ
+Framework arguments:  -noupdate -application org.eclipse.ant.core.antRunner -file E:\SVN\workspace\PJPlugin\autogen.xml
+Command-line arguments:  -clean -noupdate -application org.eclipse.ant.core.antRunner -data E:\SVN\workspace\PJPlugin -file E:\SVN\workspace\PJPlugin\autogen.xml
+
+!ENTRY org.eclipse.osgi 4 0 2013-08-31 16:06:04.456
+!MESSAGE The -clean (osgi.clean) option was not successful. Unable to clean the storage area: D:\eclipse-indigo\configuration\org.eclipse.osgi
+!SESSION 2013-08-31 16:13:38.925 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_31
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_NZ
+Framework arguments:  -noupdate -application org.eclipse.ant.core.antRunner -file E:\SVN\workspace\PJPlugin\autogen.xml
+Command-line arguments:  -clean -noupdate -application org.eclipse.ant.core.antRunner -data E:\SVN\workspace\PJPlugin -file E:\SVN\workspace\PJPlugin\autogen.xml
+
+!ENTRY org.eclipse.osgi 4 0 2013-08-31 16:13:39.396
+!MESSAGE The -clean (osgi.clean) option was not successful. Unable to clean the storage area: D:\eclipse-indigo\configuration\org.eclipse.osgi
+!SESSION 2013-08-31 16:17:35.504 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_31
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_NZ
+Framework arguments:  -noupdate -application org.eclipse.ant.core.antRunner -file E:\SVN\workspace\PJPlugin\autogen.xml
+Command-line arguments:  -clean -noupdate -application org.eclipse.ant.core.antRunner -data E:\SVN\workspace\PJPlugin -file E:\SVN\workspace\PJPlugin\autogen.xml
+
+!ENTRY org.eclipse.osgi 4 0 2013-08-31 16:17:35.962
+!MESSAGE The -clean (osgi.clean) option was not successful. Unable to clean the storage area: D:\eclipse-indigo\configuration\org.eclipse.osgi
+!SESSION 2014-08-01 14:55:03.792 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -noupdate -application org.eclipse.ant.core.antRunner -file H:\StandardWorkSpace\SOFTENG-795\PJPlugin\autogen.xml
+Command-line arguments:  -clean -noupdate -application org.eclipse.ant.core.antRunner -data H:\StandardWorkSpace\SOFTENG-795\PJPlugin -file H:\StandardWorkSpace\SOFTENG-795\PJPlugin\autogen.xml
+
+!ENTRY org.eclipse.osgi 4 0 2014-08-01 14:55:07.761
+!MESSAGE The -clean (osgi.clean) option was not successful. Unable to clean the storage area: H:\eclipse\configuration\org.eclipse.osgi

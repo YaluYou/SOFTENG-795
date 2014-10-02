@@ -1,0 +1,17 @@
+import pj.*;
+
+public class HelloWorld {
+
+	public static void main(String[] arg){
+
+		System.out.println("Hello world from sequential code");
+
+		//#omp parallel for
+		for(int i = 0; i < 10; i++){
+			System.out.println("Hello world from Pyjama");
+		}
+	}
+
+}
+
+
